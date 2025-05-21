@@ -89,7 +89,7 @@
     <div class="header">
         <h1>Welcome to Games</h1>
         <div class="nav">
-            <a href="https://deepakworld.github.io/">Home</a>
+            <a href="https://deepakrummy.github.io/">Home</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
         </div>
@@ -119,14 +119,14 @@
     let found = false;
 
     folders.forEach(folder => {
-        let gameUrl = `https://deepakfans.github.io/${folder}/${gameNumber}.swf`;
+        let gameUrl = `https://deepakrummy.github.io/funny/${folder}/${gameNumber}.swf`;
         let xhr = new XMLHttpRequest();
         xhr.open('HEAD', gameUrl, false);
         xhr.send();
 
         if (xhr.status === 200) {
             found = true;
-            window.location.href = `https://deepakfans.github.io/index1.html?file=${gameUrl}`; // Redirect with SWF file URL
+            window.location.href = `https://deepakrummy.github.io/funny/index1.html?file=${gameUrl}`; // Redirect with SWF file URL
         }
     });
 
