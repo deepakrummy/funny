@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: brown;
+            color: white;
+            overflow-x: hidden;
+        }
+        .header {
+            background-color: #333;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .game-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .game {
+            flex: 1 1 calc(8.33% - 10px);
+            box-sizing: border-box;
+            padding: 15px;
+            background-color: white;
+            color: black;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .footer {
+            background-color: #333;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+        }
+
+        /* Flying Birds */
+        .bird {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            background: url('https://i.pinimg.com/originals/fa/d2/25/fad225214130494f40d2c8f22166aab4.gif') no-repeat center/contain;
+            animation: flyBirds 15s linear infinite;
+        }
+
+        @keyframes flyBirds {
+            from {
+                transform: translate(-10vw, 10vh);
+            }
+            to {
+                transform: translate(110vw, -90vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to Games</h1>
+        <div class="nav">
+            <a href="https://deepakworld.github.io/">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+    <div class="container" id="home">
+        <div class="game-box" id="game-box"></div>
+    </div>
+
+    <div id="about" class="container">
+        <h2>About</h2>
+        <p>Welcome to our collection of games. Enjoy thousands of games to play directly from your browser!</p>
+    </div>
+
+    <div id="contact" class="container">
+        <h2>Contact</h2>
+        <p>If you have any questions, feel free to reach out at <a href="mailto:deepak@games.com">contact@games.com</a>.</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 SWF Games. All Rights Reserved.</p>
+    </div>
+
+    <script>
+       function playGame(gameNumber) {
+    let folders = ["", "new", "new1", "new2", "new3", "new4", "new5", "new6"];
+    let found = false;
+
+    folders.forEach(folder => {
+        let gameUrl = `https://deepakfans.github.io/${folder}/${gameNumber}.swf`;
+        let xhr = new XMLHttpRequest();
+        xhr.open('HEAD', gameUrl, false);
+        xhr.send();
+
+        if (xhr.status === 200) {
+            found = true;
+            window.location.href = `https://deepakfans.github.io/index1.html?file=${gameUrl}`; // Redirect with SWF file URL
+        }
+    });
+
+    if (!found) {
+        alert("Game file not found in any folder!");
+    }
+}
+
+
+        const gameBox = document.getElementById('game-box');
+        for (let i = 1; i <= 7000; i++) {
+            const gameDiv = document.createElement('div');
+            gameDiv.className = 'game';
+            gameDiv.innerHTML = `
+                <h3>Game ${i}</h3>
+                <i class='fas fa-crow' style='font-size:24px;color:red'></i>
+                <button onclick="playGame(${i})" style="padding: 10px 20px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer;">Play Now</button>
+            `;
+            gameBox.appendChild(gameDiv);
+        }
+
+        // Create flying birds dynamically
+        const createBirds = (count) => {
+            for (let i = 0; i < count; i++) {
+                const bird = document.createElement('div');
+                bird.className = 'bird';
+                bird.style.left = Math.random() * 100 + 'vw';
+                bird.style.top = Math.random() * 100 + 'vh';
+                bird.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(bird);
+            }
+        };
+
+        createBirds(5);
+    </script>
+</body>
+</html>

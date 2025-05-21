@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Game</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+        #ruffle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="ruffle"></div>
+
+    <script>
+        // Function to load the SWF file dynamically
+        function loadGame() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const swfFile = urlParams.get('file'); // Get 'file' parameter from URL
+            
+            if (swfFile) {
+                const ruffle = window.RufflePlayer.newest();
+                const player = ruffle.createPlayer();
+                const container = document.getElementById("ruffle");
+
+                player.id = "player";
+                player.style.width = "100%";
+                player.style.height = "100%";
+
+                container.appendChild(player);
+                player.load(swfFile); // Load the SWF file
+            } else {
+                alert("No SWF file specified!");
+            }
+        }
+
+        window.onload = loadGame;
+    </script>
+</body>
+</html>
